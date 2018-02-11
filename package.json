@@ -1,0 +1,14 @@
+{
+  "name": "TomcatManagerWeb",
+  "version": "0.1.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "express": "^4.16.2",
+    "moment": "^2.20.1",
+    "ncp": "^2.0.0"
+  }
+}
