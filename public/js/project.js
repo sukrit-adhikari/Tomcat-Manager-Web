@@ -107,7 +107,7 @@ new Vue({
                         }
                         if(!$("#log").is(":focus")){
                             $("#log").animate({
-                                scrollTop:$("#log")[0].scrollHeight - $("#log").height()
+                                scrollTop:100000
                             },200,function(){
                                 // success clbck           
                             })
@@ -118,7 +118,7 @@ new Vue({
                         console.log(JSON.stringify(error));
                     }
                 });
-            },2000);
+            },500);
             
         },
         sendBuildRequest: function(location){

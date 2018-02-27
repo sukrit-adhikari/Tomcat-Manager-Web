@@ -105,9 +105,9 @@ app.get('/api/log',function(req,res){
     if(req.query.previousSize !== null){
         if(parseInt(req.query.previousSize,10) === parseInt(fileSizeInBytes,10)){
             res.send({noChange:true});
-            return;
+            return false;
         }
-    }
+    } 
     res.sendFile(path.resolve(logFile));
 });
 

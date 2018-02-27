@@ -101,7 +101,7 @@
                             <input type="text" v-model="target" class="form-control" placeholder="C:\development\tomcat-1\logs\project-1.log" aria-describedby="target{{$index}}">
                             <button type="button" v-bind:disabled="isWatching(project.assetSource[index],target)" class="btn btn-info" v-on:click="watchFolder(project.assetSource[index],target)">
                                 Watch
-                                <span v-if="isWatching(project.assetSource[index],target)"><i class="fa fa-circle-o-notch fa-spin"></i></span>
+                                <span v-if="isWatching(project.assetSource[index],target)"><i class="fa fa-spinner fa-spin fa-fw"></i></span>
                             </button>
                         </div>
                     </div>
