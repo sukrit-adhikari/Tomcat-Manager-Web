@@ -5,26 +5,26 @@
     },
     "project":[
         {
-        "name":"Sample-Project Web",
-        "package":"C:\\development\\repos\\examples-tool\\Sample-project\\Sample-project-Web",
-        "war":"C:\\development\\repos\\examples-tool\\Sample-project\\Sample-project-Web\\target\\Sample-project-Web.war",
-        "log":"C:\\development\\tomcat-1\\logs\\Sample-project.log",
-        "assetSource":["C:\\development\\repos\\examples-tool\\Sample-project\\Sample-project-Web\\target\\Sample-project-Web\\resources",
-                        "C:\\development\\repos\\examples-tool\\Sample-project\\Sample-project-Web\\target\\Sample-project-Web\\WEB-INF"
+        "name":"Sarnova Web",
+        "package":"C:\\development\\repos\\bids-tool\\SarnovaBid\\SarnovaBid-Web",
+        "war":"C:\\development\\repos\\bids-tool\\SarnovaBid\\SarnovaBid-Web\\target\\SarnovaBid-Web.war",
+        "log":"C:\\development\\tomcat-1\\logs\\SarnovaBid.log",
+        "assetSource":["C:\\development\\repos\\bids-tool\\SarnovaBid\\SarnovaBid-Web\\src\\main\\webapp\\resources",
+                        "C:\\development\\repos\\bids-tool\\SarnovaBid\\SarnovaBid-Web\\src\\main\\webapp\\WEB-INF"
                         ],
-        "assetTarget":["C:\\development\\tomcat-1\\webapps\\Sample-project-Web\\resources",
-                        "C:\\development\\tomcat-1\\webapps\\Sample-project-Web\\WEB-INF"]
+        "assetTarget":["C:\\development\\tomcat-1\\webapps\\SarnovaBid-Web\\resources",
+                        "C:\\development\\tomcat-1\\webapps\\SarnovaBid-Web\\WEB-INF"]
         },
         {
-        "name":"Sample-Project Services",
-        "package":"C:\\development\\repos\\examples-tool\\Sample-project\\Sample-project-Services",
-        "war":"C:\\development\\repos\\examples-tool\\Sample-project\\Sample-project-Services\\target\\Sample-project-Services.war",
-        "log":"C:\\development\\tomcat-1\\logs\\Sample-project-Services.log",
-        "assetSource":["C:\\development\\repos\\examples-tool\\Sample-project\\Sample-project-Services\\target\\Sample-project-Services\\resources",
-                        "C:\\development\\repos\\examples-tool\\Sample-project\\Sample-project-Services\\target\\Sample-project-Services\\WEB-INF"
+        "name":"Sarnova Services",
+        "package":"C:\\development\\repos\\bids-tool\\SarnovaBid\\SarnovaBid-Services",
+        "war":"C:\\development\\repos\\bids-tool\\SarnovaBid\\SarnovaBid-Services\\target\\SarnovaBid-Services.war",
+        "log":"C:\\development\\tomcat-1\\logs\\SarnovaBid-Services.log",
+        "assetSource":["C:\\development\\repos\\bids-tool\\SarnovaBid\\SarnovaBid-Services\\target\\SarnovaBid-Services\\resources",
+                        "C:\\development\\repos\\bids-tool\\SarnovaBid\\SarnovaBid-Services\\target\\SarnovaBid-Services\\WEB-INF"
                         ],
-        "assetTarget":["C:\\development\\tomcat-1\\Servicesapps\\Sample-project-Services\\resources",
-                        "C:\\development\\tomcat-1\\Servicesapps\\Sample-project-Services\\Services-INF"]
+        "assetTarget":["C:\\development\\tomcat-1\\Servicesapps\\SarnovaBid-Services\\resources",
+                        "C:\\development\\tomcat-1\\Servicesapps\\SarnovaBid-Services\\Services-INF"]
         }
     ]
 }

@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="libs/font-awesome-4.7/css/fa.min.css"/>
     <!-- <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap-reboot.min.css"> -->
-    <script  src="http://code.jquery.com/jquery-3.3.1.min.js"  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.3/js/tether.min.js"></script>
+    <script  src="libs/jquery-3.3.1/jquery.min.js"></script>
+    <script src="libs/tether-1.4.3/tether.min.js"></script>
+
     <script src="libs/bootstrap/js/bootstrap.min.js"></script>
     <script src="libs/vue/vue.min.js"></script>
     
@@ -19,7 +21,7 @@
 </head>
 
 <body>
-    <div class="container" id="tomcatManager">
+    <div class="container-fluid" id="tomcatManager">
         <div class="row  align-items-center">
             <div class="col-lg-2">
                 <img src="images/tomcat.png" />
@@ -37,21 +39,30 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row form-group">
             <div class="col-lg-2">
                 <button type="button" class="btn btn-success">Save</button>
             </div>
             <div class="col-lg-5">
-                <button type="button" class="btn btn-info" v-on:click="sendTomcatStartRequest">Start</button>
-                <button type="button" class="btn btn-danger" v-on:click="sendTomcatStopRequest">Stop</button>
+                <button type="button" class="btn btn-info" v-on:click="sendTomcatStartRequest(manage.tomcat.bin)">Start</button>
+                <!-- <button type="button" class="btn btn-success" v-on:click="loadLog">Live Log</button> -->
+                <button type="button" class="btn btn-danger" v-on:click="sendTomcatStopRequest(manage.tomcat.bin)">Stop</button>
+                
                 <!-- <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
                     <label class="form-check-label" for="inlineCheckbox1">asd</label>
                 </div> -->
             </div>
             <div class="col-lg-5">
-                <button type="button" class="btn btn-info">Redeploy all WARs</button>
+                <button type="button" class="btn btn-info"  >Redeploy all WARs</button>
                 <button type="button" class="btn btn-danger">Delete all WARs</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <textarea class="form-control form-group" id="log" wrap="off" rows="20">{{log}}</textarea>
+                <!-- <p id="log">{{log}}</p> -->
             </div>
         </div>
 
@@ -62,12 +73,12 @@
                     <span class="input-group-addon" id="package">MVN Package</span>
                     <input type="text" v-model="project.package" class="form-control" placeholder="C:\development\project-1" aria-describedby="mpackage">
                     <span class="input-group-addon">"mvn package" will be run here</span>
-                    <button type="button" class="btn btn-info">Run</button>
+                    <button type="button" :disabled="!isBuilding" v-on:click="sendBuildRequest(project.package)" class="btn btn-info">Build</button>
                 </div>
                 <div class="input-group form-group">
                     <span class="input-group-addon" id="war">WAR File</span>
                     <input type="text" v-model="project.war" class="form-control" placeholder="C:\development\project-1\target\project-1.war" aria-describedby="war">
-                    <button type="button" class="btn btn-info">Copy War</button>
+                    <button type="button" class="btn btn-info" v-on:click="copyFile(project.war,manage.tomcat.deploy)">Copy War</button>
                 </div>
                 <div class="input-group form-group">
                     <span class="input-group-addon" id="log">Log Location</span>
@@ -76,8 +87,8 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="input-group form-group" v-for="source in project.assetSource ">
-                            <span class="input-group-addon" id="source{{$index}}">Source Asset Location</span>
+                        <div class="input-group form-group" v-for="(source,index) in project.assetSource ">
+                            <span class="input-group-addon" id="source">Source Asset Location</span>
                             <input type="text" v-model="source" class="form-control" placeholder="C:\development\tomcat-1\logs\project-1.log" aria-describedby="source{{$index}}">
                         </div>
                     </div>
@@ -85,34 +96,27 @@
                         &lt; - &gt;
                     </div> -->
                     <div class="col">
-                        <div class="input-group form-group" v-for="target in project.assetTarget">
-                            <span class="input-group-addon" id="target{{$index}}">Target Asset Location</span>
+                        <div class="input-group form-group" v-for="(target,index) in project.assetTarget">
+                            <span class="input-group-addon" id="target">Target Asset Location</span>
                             <input type="text" v-model="target" class="form-control" placeholder="C:\development\tomcat-1\logs\project-1.log" aria-describedby="target{{$index}}">
-                            <button type="button" class="btn btn-info">Copy</button>
+                            <button type="button" v-bind:disabled="isWatching(project.assetSource[index],target)" class="btn btn-info" v-on:click="watchFolder(project.assetSource[index],target)">
+                                Watch
+                                <span v-if="isWatching(project.assetSource[index],target)"><i class="fa fa-circle-o-notch fa-spin"></i></span>
+                            </button>
                         </div>
                     </div>
                 </div>
-                
-               
             </div>
         </div>
-
 
     </div>
 
 
-
-
-
-
-
-
-
-<div class="modal fade container-fluid" id="responseReceivedModal">
+<div class="modal container-fluid" data-animation="false" id="responseReceivedModal">
 <div class="modal-dialog" role="document" style="max-width:100%;">
     <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title">Response Received</h5>
+        <h5 class="modal-title">Response</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
         </button>
@@ -128,7 +132,7 @@
 </div>
 </div>
 
-
+<script src="js/md5.min.js"></script>
 <script src="js/project.js"></script>
 </body>
 
